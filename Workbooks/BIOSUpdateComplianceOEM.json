@@ -68,7 +68,7 @@
         "type": 3,
         "content": {
           "version": "KqlItem/1.0",
-          "query": "let BIOSDATA = OEMBIOSInformation_CL \n| summarize arg_max(TimeGenerated, *) by SKU_s;\nDeviceInventory_CL\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\n| where OEM_s == \"HP\" or OEM_s == \"Dell\" or OEM_s == \"Lenovo\" or OEM_s == \"Dell Inc.\"\n| extend ComputerOEMUpdateStatus = iff((parse_version(BiosVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\n| project TimeGenerated, ComputerName_s, OEM_s, Model_s, todatetime(OEMDate_s), todatetime(BiosDate_s), OEMVersion_s, BiosVersion_s, ComputerOEMUpdateStatus, ManagedDeviceName_s\n| summarize dcount(Model_s) by OEM_s\n",
+          "query": "let BIOSDATA = OEMBIOSInformation_CL \n| summarize arg_max(TimeGenerated, *) by SKU_s;\nDeviceInventory_CL\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\n| where OEM_s == \"HP\" or OEM_s == \"Dell\" or OEM_s == \"Lenovo\" or OEM_s == \"Dell Inc.\"\n| extend ComputerOEMUpdateStatus = iff((parse_version(BIOSVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\n| project TimeGenerated, ComputerName_s, OEM_s, Model_s, todatetime(OEMDate_s), todatetime(BIOSDate_s), OEMVersion_s, BIOSVersion_s, ComputerOEMUpdateStatus, ManagedDeviceName_s\n| summarize dcount(Model_s) by OEM_s\n",
           "size": 3,
           "title": "Intune Supported Models for BIOS Reporting",
           "timeContext": {
@@ -133,7 +133,7 @@
         "type": 3,
         "content": {
           "version": "KqlItem/1.0",
-          "query": "let BIOSDATA = OEMBIOSInformation_CL \r\n| summarize arg_max(TimeGenerated, *) by SKU_s;\r\nDeviceInventory_CL\r\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\r\n| where OEM_s == \"HP\" or OEM_s == \"Dell\" or OEM_s == \"Lenovo\" or OEM_s == \"Dell Inc.\"\t\r\n| extend ComputerOEMUpdateStatus = iff((parse_version(BiosVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\r\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\r\n| distinct OEM_s, Model_s, SystemSKU_s\r\n",
+          "query": "let BIOSDATA = OEMBIOSInformation_CL \r\n| summarize arg_max(TimeGenerated, *) by SKU_s;\r\nDeviceInventory_CL\r\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\r\n| where OEM_s == \"HP\" or OEM_s == \"Dell\" or OEM_s == \"Lenovo\" or OEM_s == \"Dell Inc.\"\t\r\n| extend ComputerOEMUpdateStatus = iff((parse_version(BIOSVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\r\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\r\n| distinct OEM_s, Model_s, SystemSKU_s\r\n",
           "size": 3,
           "title": "Model list from BIOS Table",
           "timeContext": {
@@ -203,7 +203,7 @@
         "type": 3,
         "content": {
           "version": "KqlItem/1.0",
-          "query": "let BIOSDATA = OEMBIOSInformation_CL \r\n| summarize arg_max(TimeGenerated, *) by SKU_s;\r\nDeviceInventory_CL\r\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\r\n| where OEM_s in ('HP', 'Dell','Lenovo') and OEMVersion_s <> \"NA\"\r\n| extend ComputerOEMUpdateStatus = iff((parse_version(BiosVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\r\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\r\n| summarize count() by ComputerOEMUpdateStatus",
+          "query": "let BIOSDATA = OEMBIOSInformation_CL \r\n| summarize arg_max(TimeGenerated, *) by SKU_s;\r\nDeviceInventory_CL\r\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\r\n| where OEM_s in ('HP', 'Dell','Lenovo') and OEMVersion_s <> \"NA\"\r\n| extend ComputerOEMUpdateStatus = iff((parse_version(BIOSVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\r\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\r\n| summarize count() by ComputerOEMUpdateStatus",
           "size": 3,
           "timeContext": {
             "durationMs": 0
@@ -231,7 +231,7 @@
         "type": 3,
         "content": {
           "version": "KqlItem/1.0",
-          "query": "let BIOSDATA = OEMBIOSInformation_CL \r\n| summarize arg_max(TimeGenerated, *) by SKU_s;\r\nDeviceInventory_CL\r\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\r\n| where OEM_s in ('HP', 'Dell','Lenovo', 'Dell Inc.') and OEMVersion_s <> \"NA\"\r\n| extend ComputerOEMUpdateStatus = iff((parse_version(BiosVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\r\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\r\n| project ComputerOEMUpdateStatus, ComputerName_s, OEM_s, Model_s,  BiosDate_s, BiosVersion_s, OEMDate_s, OEMVersion_s",
+          "query": "let BIOSDATA = OEMBIOSInformation_CL \r\n| summarize arg_max(TimeGenerated, *) by SKU_s;\r\nDeviceInventory_CL\r\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\r\n| where OEM_s in ('HP', 'Dell','Lenovo', 'Dell Inc.') and OEMVersion_s <> \"NA\"\r\n| extend ComputerOEMUpdateStatus = iff((parse_version(BIOSVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\r\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\r\n| project ComputerOEMUpdateStatus, ComputerName_s, OEM_s, Model_s,  BIOSDate_s, BIOSVersion_s, OEMDate_s, OEMVersion_s",
           "size": 0,
           "title": "BIOS Update Compliance with OEM data",
           "timeContext": {
@@ -384,7 +384,7 @@
         "type": 3,
         "content": {
           "version": "KqlItem/1.0",
-          "query": "let BIOSDATA = OEMBIOSInformation_CL \r\n| summarize arg_max(TimeGenerated, *) by SKU_s;\r\nDeviceInventory_CL\r\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\r\n| where OEM_s in ('HP', 'Dell','Lenovo', 'Dell Inc.') and OEMVersion_s <> \"NA\" and todatetime(BiosDate_s) < ago(365d)\r\n| extend ComputerOEMUpdateStatus = iff((parse_version(BiosVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\r\n| where ComputerOEMUpdateStatus <> \"OK\"\r\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\r\n| project ComputerOEMUpdateStatus, ComputerName_s, OEM_s, Model_s,  todatetime(BiosDate_s), BiosVersion_s, OEMDate_s, OEMVersion_s\r\n| sort by todatetime(BiosDate_s)",
+          "query": "let BIOSDATA = OEMBIOSInformation_CL \r\n| summarize arg_max(TimeGenerated, *) by SKU_s;\r\nDeviceInventory_CL\r\n| join kind=leftouter BIOSDATA on $right.SKU_s == $left.SystemSKU_s\r\n| where OEM_s in ('HP', 'Dell','Lenovo', 'Dell Inc.') and OEMVersion_s <> \"NA\" and todatetime(BIOSDate_s) < ago(365d)\r\n| extend ComputerOEMUpdateStatus = iff((parse_version(BIOSVersion_s) < parse_version(OEMVersion_s)), \"Update available from OEM\", \"OK\")\r\n| where ComputerOEMUpdateStatus <> \"OK\"\r\n| summarize arg_max(TimeGenerated, *) by ManagedDeviceID_g\r\n| project ComputerOEMUpdateStatus, ComputerName_s, OEM_s, Model_s,  todatetime(BIOSDate_s), BIOSVersion_s, OEMDate_s, OEMVersion_s\r\n| sort by todatetime(BIOSDate_s)",
           "size": 0,
           "title": "Computer with older BIOS than 1 year and newer BIOS exists",
           "timeContext": {
@@ -397,13 +397,13 @@
           "gridSettings": {
             "formatters": [
               {
-                "columnMatch": "BiosDate_s",
+                "columnMatch": "BIOSDate_s",
                 "formatter": 6
               }
             ],
             "sortBy": [
               {
-                "itemKey": "$gen_heatmap_BiosDate_s_4",
+                "itemKey": "$gen_heatmap_BIOSDate_s_4",
                 "sortOrder": 2
               }
             ],
